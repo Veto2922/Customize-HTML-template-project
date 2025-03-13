@@ -454,208 +454,259 @@
 </head>
 
 <body>
-    <!-- Header & Navigation -->
-    <header>
-      <div class="container">
-        <nav>
-          <a href="#" class="logo">TechNova</a>
-          <div class="menu-toggle" id="menuToggle">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-          </div>
-          <div class="nav-links" id="navLinks">
-            <a href="#features">Features</a>
-            <a href="#testimonials">Testimonials</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#contact">Contact</a>
-          </div>
-          <button class="btn">Get Started</button>
-        </nav>
-      </div>
-    </header>
-  
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <div class="hero-text">
-            <h1>Revolutionizing Your Digital Experience</h1>
-            <p>Empower your business with cutting-edge solutions designed to streamline operations and maximize
-              efficiency.</p>
-            <button class="btn">Get Started Today</button>
-          </div>
-          <div class="hero-img">
-            <img src="/api/placeholder/600/400" alt="placeholder" />
-          </div>
-        </div>
-      </div>
-    </section>
-  
-    <!-- Features Section -->
-    <section class="features" id="features">
-      <div class="container">
-        <div class="section-title">
-          <h2>Why Choose TechNova?</h2>
-          <p>Our platform offers everything you need to take your business to the next level.</p>
-        </div>
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">✨</div>
-            <h3>Smart Automation</h3>
-            <p>Automate repetitive tasks and free up your team to focus on what matters most.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">📊</div>
-            <h3>Advanced Analytics</h3>
-            <p>Get real-time insights and make data-driven decisions to grow your business.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🔒</div>
-            <h3>Enterprise Security</h3>
-            <p>Rest easy knowing your data is protected with the highest security standards.</p>
-          </div>
-          <div class="feature-card">
-              <div class="feature-icon">🔄</div>
-              <h3>Seamless Integration</h3>
-              <p>Integrate with your favorite tools and platforms for a streamlined workflow.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-      <div class="container">
-        <div class="section-title">
-          <h2>What Our Clients Say</h2>
-          <p>Trusted by thousands of businesses worldwide.</p>
-        </div>
-        <div class="testimonial-slider">
-          <div class="testimonial active">
-            <p class="testimonial-text">"This platform has completely transformed how we operate. Our productivity has
-              increased by 200% since we started using it."</p>
-            <p class="testimonial-author">Sarah Johnson</p>
-            <p class="testimonial-company">CEO, TechCorp</p>
-          </div>
-          <div class="dots">
-            <div class="dot active"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-  
-    <!-- CTA Section -->
-    <section class="cta">
-      <div class="container">
-        <h2>Stay Updated with Our Latest Innovations</h2>
-        <p>Subscribe to our newsletter for exclusive insights, updates, and special offers.</p>
-        <form class="email-form">
-          <input type="email" placeholder="Abdelrahman.m2922@gmail.com" required>
-          <button type="submit" class="btn btn-white">Get Started</button>
-        </form>
-      </div>
-    </section>
-  
-    <!-- Footer -->
-    <footer>
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-column">
-            <h3>TechNova</h3>
-            <p>The all-in-one solution for modern businesses looking to scale and succeed in today's competitive market.
-            </p>
-            <div class="social-links">
-              <a href="#">📱</a>
-              <a href="#">💻</a>
-              <a href="#">📧</a>
-              <a href="#">🌐</a>
-            </div>
-          </div>
-          <div class="footer-column">
-            <h3>Company</h3>
-            <ul>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Our Team</a></li>
-              <li><a href="#">Careers</a></li>
-              <li><a href="#">Press</a></li>
-            </ul>
-          </div>
-          <div class="footer-column">
-            <h3>Resources</h3>
-            <ul>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Guides</a></li>
-              <li><a href="#">Help Center</a></li>
-              <li><a href="#">Community</a></li>
-            </ul>
-          </div>
-          <div class="footer-column">
-            <h3>Legal</h3>
-            <ul>
-              <li><a href="#">Terms of Service</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Cookies</a></li>
-              <li><a href="#">GDPR</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>&copy; 2025 TechNova. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
-  
-    <script>
-      // Mobile menu toggle
-      const menuToggle = document.getElementById('menuToggle');
-      const navLinks = document.getElementById('navLinks');
-  
-      menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-      });
-  
-      // Simple testimonial slider
-      const dots = document.querySelectorAll('.dot');
-      const testimonials = document.querySelectorAll('.testimonial');
-  
-      dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-          // Remove active class from all dots and testimonials
-          dots.forEach(d => d.classList.remove('active'));
-          testimonials.forEach(t => t.classList.remove('active'));
-  
-          // Add active class to clicked dot and corresponding testimonial
-          dot.classList.add('active');
-          if (testimonials[index]) {
-            testimonials[index].classList.add('active');
-          }
-        });
-      });
-  
-      // Smooth scrolling for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-  
-          const targetId = this.getAttribute('href');
-          if (targetId === '#') return;
-  
-          const targetElement = document.querySelector(targetId);
-          if (targetElement) {
-            window.scrollTo({
-              top: targetElement.offsetTop - 80,
-              behavior: 'smooth'
-            });
-  
-            // Close mobile menu if open
-            navLinks.classList.remove('active');
-          }
-        });
-      });
-    </script>
-  </body>
+  <!-- Header & Navigation -->
+  <header>
+  <div class="container">
+  <nav>
+  <a href="#" class="logo">Quantum Brews</a>
+  <div class="menu-toggle" id="menuToggle">
+  <span class="bar"></span>
+  <span class="bar"></span>
+  <span class="bar"></span>
+  </div>
+  <div class="nav-links" id="navLinks">
+  <a href="#our-blends">Our Blends</a>
+  <a href="#customer-reviews">Customer Reviews</a>
+  <a href="#subscriptions">Subscriptions & Pricing</a>
+  <a href="#get-in-touch">Get in Touch</a>
+  <a href="#about-us">About Us</a>
+  <a href="#brewing-tips">Brewing Tips</a>
+  </div>
+  <a href="#" class="btn">Shop Now</a>
+  </nav>
+  </div>
+  </header>
+ 
+  <!-- Hero Section -->
+  <section class="hero">
+  <div class="container">
+  <div class="hero-content">
+  <div class="hero-text">
+  <h1>Elevate Your Coffee Experience</h1>
+  <p>Savor the richness of expertly roasted, ethically sourced beans. Our handcrafted blends are
+  designed for those who appreciate bold flavors, smooth textures, and the perfect cup—every time. Join
+  us in redefining your daily brew.</p>
+  <a href="#" class="btn">Shop Quantum Brews</a>
+  </div>
+  <div class="hero-img">
+  <img src="/api/placeholder/600/400" alt="placeholder" />
+  </div>
+  </div>
+  </div>
+  </section>
+ 
+  <!-- Features Section -->
+  <section class="features" id="features">
+  <div class="container">
+  <div class="section-title">
+  <h2>The Quantum Brews Difference</h2>
+  <p>From bean to cup, experience the art of coffee. Our expertly crafted blends deliver rich flavors,
+  sustainable sourcing, and a perfect brew every time.</p>
+  </div>
+  <div class="features-grid">
+  <div class="feature-card">
+  <div class="feature-icon">🌍</div>
+  <h3>Ethically Sourced</h3>
+  <p>We partner with sustainable farms to bring you the finest, responsibly grown beans—supporting
+  farmers and the environment with every sip.</p>
+  </div>
+  <div class="feature-card">
+  <div class="feature-icon">🔥</div>
+  <h3>Expertly Roasted</h3>
+  <p>Our master roasters unlock the full potential of each bean, crafting bold, smooth, and aromatic
+  blends that elevate your coffee experience.</p>
+  </div>
+  <div class="feature-card">
+  <div class="feature-icon">🎨</div>
+  <h3>Unique Flavor Profiles</h3>
+  <p>From vibrant fruity notes to deep chocolatey undertones, our blends are designed to delight every
+  coffee lover’s palate.</p>
+  </div>
+  </div>
+  </div>
+  </section>
+ 
+  <!-- Testimonials Section -->
+  <section class="testimonials" id="testimonials">
+  <div class="container">
+  <div class="section-title">
+  <h2>What Coffee Lovers Are Saying</h2>
+  <p>Loved by coffee enthusiasts, home baristas, and professionals alike. See why Quantum Brews is their
+  daily favorite.</p>
+  </div>
+  <div class="testimonial-slider">
+  <div class="testimonial active">
+  <p class="testimonial-text">"Quantum Brews' Ethiopian Yirgacheffe is a revelation! The floral notes and bright
+  acidity make it my go-to morning coffee. I’ve never tasted anything this vibrant and smooth before!"</p>
+  <p class="testimonial-author">Emily Carter</p>
+  <p class="testimonial-company">Coffee Enthusiast & Daily Brewer</p>
+  </div>
+  <div class="dots">
+  <div class="dot active"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  </div>
+  </div>
+  </div>
+  </section>
+ 
+  <!-- Pricing Section -->
+  <section class="pricing" id="subscriptions">
+  <div class="container">
+  <h2>☕ Our Subscription Plans ☕</h2>
+  <p>Choose the perfect plan to fuel your coffee passion. Freshly roasted, delivered to your door—always at
+  peak flavor.</p>
+  <div class="pricing-table">
+  <div class="pricing-tier">
+  <h3>The Daily Brew</h3>
+  <div class="price">$19/month</div>
+  <div class="description">Perfect for your daily caffeine fix.</div>
+  <ul>
+  <li>☑ One 12oz bag of coffee per month</li>
+  <li>☑ Free standard shipping</li>
+  <li>☑ Rotating selection of classic blends</li>
+  <li>☑ Exclusive brewing tips & guides</li>
+  </ul>
+  <a href="#" class="btn">Select Plan</a>
+  </div>
+  <div class="pricing-tier">
+  <h3>The Enthusiast</h3>
+  <div class="price">$29/month</div>
+  <div class="description">Explore a wider variety of flavors & blends.</div>
+  <ul>
+  <li>☑ Two 12oz bags of coffee per month</li>
+  <li>☑ Free priority shipping</li>
+  <li>☑ Choose from curated seasonal blends</li>
+  <li>☑ Members-only discounts & early access to new releases</li>
+  </ul>
+  <a href="#" class="btn">Select Plan</a>
+  </div>
+  <div class="pricing-tier">
+  <h3>The Connoisseur</h3>
+  <div class="price">$49/month</div>
+  <div class="description">Experience the rarest and most exclusive coffees.</div>
+  <ul>
+  <li>☑ Three 12oz bags of premium, single-origin coffee per month</li>
+  <li>☑ Free express shipping</li>
+  <li>☑ Personalized coffee selections based on your taste profile</li>
+  <li>☑ Early access to limited-edition & micro-lot coffees</li>
+  </ul>
+  <a href="#" class="btn">Select Plan</a>
+  </div>
+  </div>
+  </div>
+  </section>
+ 
+  <!-- CTA Section -->
+  <section class="cta">
+  <div class="container">
+  <h2>☕ Ready to Brew the Perfect Cup? ☕</h2>
+  <p>Join a community of passionate coffee lovers and get access to exclusive blends, expert brewing tips,
+  and special offers—delivered straight to your inbox.</p>
+  <form class="email-form">
+  <input type="email" placeholder="Enter your email for exclusive offers" required>
+  <a href="#" class = "btn">Join the Coffee Club</a>
+  </form>
+  </div>
+  </section>
+ 
+  <!-- Footer -->
+  <footer>
+  <div class="container">
+  <div class="footer-content">
+  <div class="footer-column">
+  <h3>Quantum Brews</h3>
+  <p>Crafting exceptional coffee, one cup at a time. Ethically sourced, expertly roasted, and delivered
+  fresh to fuel your passion for the perfect brew.
+  </p>
+  <div class="social-links">
+  <a href="#"><img src="/api/placeholder/30/30" alt="Instagram"/></a>
+  <a href="https://alcamp.electropi.ai/login"><img src="/api/placeholder/30/30" alt="Facebook"/></a>
+  <a href="#"><img src="/api/placeholder/30/30" alt="Twitter"/></a>
+  <a href="#"><img src="/api/placeholder/30/30" alt="YouTube"/></a>
+  </div>
+  </div>
+  <div class="footer-column">
+  <h3>Company</h3>
+  <ul>
+  <li><a href="#">About Us</a></li>
+  <li><a href="#">Meet the Roasters</a></li>
+  <li><a href="#">Join Our Team</a></li>
+  </ul>
+  </div>
+  <div class="footer-column">
+  <h3>Resources</h3>
+  <ul>
+  <li><a href="#">Coffee Journal</a></li>
+  <li><a href="#">Brewing Guides</a></li>
+  <li><a href="#">Coffee FAQs</a></li>
+  <li><a href="#">Community</a></li>
+  </ul>
+  </div>
+  <div class="footer-column">
+  <h3>Legal</h3>
+  <ul>
+  <li><a href="#">Terms of Service</a></li>
+  <li><a href="#">Privacy Policy</a></li>
+  <li><a href="#">Cookies</a></li>
+  <li><a href="#">GDPR</a></li>
+  </ul>
+  </div>
+  </div>
+  <div class="footer-bottom">
+  <p>© 2025 Quantum Brews. All rights reserved.</p>
+  </div>
+  </div>
+  </footer>
+ 
+  <script>
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+ 
+  menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+  });
+ 
+  // Simple testimonial slider
+  const dots = document.querySelectorAll('.dot');
+  const testimonials = document.querySelectorAll('.testimonial');
+ 
+  dots.forEach((dot, index) => {
+  dot.addEventListener('click', () => {
+  // Remove active class from all dots and testimonials
+  dots.forEach(d => d.classList.remove('active'));
+  testimonials.forEach(t => t.classList.remove('active'));
+ 
+  // Add active class to clicked dot and corresponding testimonial
+  dot.classList.add('active');
+  if (testimonials[index]) {
+  testimonials[index].classList.add('active');
+  }
+  });
+  });
+ 
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+  e.preventDefault();
+ 
+  const targetId = this.getAttribute('href');
+  if (targetId === '#') return;
+ 
+  const targetElement = document.querySelector(targetId);
+  if (targetElement) {
+  window.scrollTo({
+  top: targetElement.offsetTop - 80,
+  behavior: 'smooth'
+  });
+ 
+  // Close mobile menu if open
+  navLinks.classList.remove('active');
+  }
+  });
+  });
+  </script>
+ </body>
   
 </html>
