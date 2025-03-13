@@ -1,5 +1,5 @@
 from langchain_core.output_parsers import JsonOutputParser
-from langchain_core.pydantic_v1 import BaseModel
+from pydantic import BaseModel
 from src.parsers.base import OutputParser
 
 class JsonParser(OutputParser):

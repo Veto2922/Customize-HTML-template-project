@@ -5,16 +5,20 @@ from src.templates.html_analysis import HtmlAnalysisTemplateBuilder
 from src.templates.html_customization import HtmlCustomizationTemplateBuilder
 from src.models.html_template import HtmlTemplate
 from src.processor import LangChainProcessor
+from src.html_processing.html_processing import HtmlProcessing
 
 def main():
     # Initialize the LLM provider
     llm_provider = GoogleLLMProvider()
     
-    # Create the processor
-    processor = LangChainProcessor(llm_provider)
+    # Initialize html processor
+    html_processor = HtmlProcessing(r'data\test_html.html')
     
-    # Load HTML content
-    processor.load_html_from_file(r'data\test_html.html')
+    # remove css from the html content
+    html_content_without_css = html_processor.remove_html_styles()
+    
+    # Create the processor
+    processor = LangChainProcessor(llm_provider, html_content_without_css)
     
     # Generate questions
     template_builder = HtmlAnalysisTemplateBuilder()
@@ -65,6 +69,10 @@ def main():
     
     print("\nCustomized HTML Template:")
     print(customized_html['html_template'])
+    
+    new_html = html_processor.replace_html_body(customized_html['html_template'])
+    
+    html_processor.save_html('new_html.html', new_html)
 
 if __name__ == "__main__":
     main()
