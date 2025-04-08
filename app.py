@@ -1,7 +1,7 @@
 import streamlit as st
-from src.llm_blocks.customize_json_data import customize_json_data
-from src.html_process_manager import HtmlProcessManager
-from src.utils.move_random_images import move_random_images
+from src.llm_blocks.custmize_json_placeholder import CustomizeJsonPlaceholder
+from src.utils.html_process_manager import HtmlProcessManager
+from src.utils.select_random_image_and_move_it_to_Html_src import select_random_image_and_move_it_to_Html_src
 
 # # Save to specific path
 save_path = r'technology-software_template\new_html.html'
@@ -24,14 +24,15 @@ if st.button("🚀 Generate HTML"):
             json_placeholder = html_manager.get_json_placeholder(r'Placeholder_template\software_placeholders\placeholder.json')
             html_placeholder = html_manager.get_html_placeholder(r'Placeholder_template\software_placeholders\placeholder.html')
             
-            updated_json = customize_json_data(business_name, business_description, json_placeholder)
-            new_html = html_manager.geneate_new_html(updated_json, html_placeholder)
-            # Generate new HTML using the updated JSON object
-            new_html = html_manager.save_new_html(new_html , save_path)
+            customize_json_placeholder_llm =  CustomizeJsonPlaceholder()
+            updated_json = customize_json_placeholder_llm.run(business_name, business_description, json_placeholder)
+            new_html = html_manager.generate_new_html(updated_json, html_placeholder)
             
             src_root_folder = r"Placeholder_template\software_images"
             dest_folder = r"technology-software_template\assets\img"
-            move_random_images(src_root_folder, dest_folder)
+            select_random_image_and_move_it_to_Html_src(src_root_folder, dest_folder)
+            
+            html_manager.save_new_html(new_html , r'technology-software_template\new_html.html')
 
 
         st.success("✅ HTML generated successfully!")

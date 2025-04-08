@@ -2,7 +2,8 @@ import os
 import shutil
 import random
 
-def move_random_images(src_root_folder, dest_folder, image_extensions={'.jpg', '.jpeg', '.png', '.bmp', '.gif'}):
+# TODO : make uint test for this function , add logging , exception handling and try to make it as class
+def select_random_image_and_move_it_to_Html_src(src_root_folder, dest_folder, image_extensions={'.jpg', '.jpeg', '.png', '.bmp', '.gif'}):
     if not os.path.exists(dest_folder):
         os.makedirs(dest_folder)
 

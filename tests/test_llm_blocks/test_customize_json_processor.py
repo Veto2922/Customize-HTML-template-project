@@ -1,6 +1,7 @@
 import pytest
-from unittest.mock import patch, MagicMock
-from src.llm_blocks.customize_json_data import customize_json_data
+from unittest.mock import patch, mock_open, MagicMock
+from src.llm_blocks.custmize_json_placeholder import CustomizeJsonPlaceholder
+
 
 
 @pytest.fixture
@@ -25,7 +26,7 @@ def sample_input():
 
 def test_customize_json_data_returns_expected_dict(sample_input):
     
-    result = customize_json_data(
+    result = CustomizeJsonPlaceholder().run(
         sample_input["business_name"],
         sample_input["business_description"],
         sample_input["json_placeholder"]
