@@ -89,7 +89,7 @@
   "C078": "Plan 1 feature #4",
   "C079": "Plan 1 feature #5",
   "C080": "Plan 1 missing feature",
-  "C081": "Plan 1 price",
+  "C081": "Plan 1 price (e.g. $400)",
   "C082": "Plan 1 purchase button text",
 
   "C083": "Plan 2 name",
@@ -100,7 +100,7 @@
   "C088": "Plan 2 feature #4",
   "C089": "Plan 2 feature #5",
   "C090": "Plan 2 missing feature",
-  "C091": "Plan 2 price",
+  "C091": "Plan 2 price (e.g. $400)",
   "C092": "Plan 2 purchase button text",
 
   "C093": "Plan 3 name",
@@ -110,7 +110,7 @@
   "C097": "Plan 3 feature #4",
   "C098": "Plan 3 feature #5",
   "C099": "Plan 3 missing feature",
-  "C100": "Plan 3 price",
+  "C100": "Plan 3 price (e.g. $400)",
   "C101": "Plan 3 purchase button text",
 
   "C102": "FAQ section heading",
