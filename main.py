@@ -1,78 +1,35 @@
-from src.providers.google_provider import GoogleLLMProvider
-from src.parsers.comma_parser import CommaSeparatedParser
-from src.parsers.json_parser import JsonParser
-from src.templates.html_analysis import HtmlAnalysisTemplateBuilder
-from src.templates.html_customization import HtmlCustomizationTemplateBuilder
-from src.models.html_template import HtmlTemplate
-from src.processor import LangChainProcessor
-from src.html_processing.html_processing import HtmlProcessing
-
-def main():
-    # Initialize the LLM provider
-    llm_provider = GoogleLLMProvider()
-    
-    # Initialize html processor
-    html_processor = HtmlProcessing(r'data\test_html.html')
-    
-    # remove css from the html content
-    html_content_without_css = html_processor.remove_html_styles()
-    
-    # Create the processor
-    processor = LangChainProcessor(llm_provider, html_content_without_css)
-    
-    # Generate questions
-    template_builder = HtmlAnalysisTemplateBuilder()
-    parser = CommaSeparatedParser()
-    
-    questions = processor.generate_questions(template_builder, parser)
-    print("Generated Questions:")
-    for idx, question in enumerate(questions, 1):
-        print(f"{idx}. {question}")
-    
-    # -------------------------------------------------
-    # Example QA responses
-    website_content = {
-        "What is the desired brand name- logo text for the website header and footer?": "TechNova",
-        "What wording should be used for the main heading (H1) on the hero section of the landing page?": "Revolutionizing Your Digital Experience",
-        "What descriptive text should accompany the main heading in the hero section to explain the business offering?": "Empower your business with cutting-edge solutions designed to streamline operations and maximize efficiency.",
-        "What call-to-action text should be used on the primary button in the hero section?": "Get Started Today",
-        "What heading should be used for the 'Features' section to best describe the benefits offered?": "Why Choose TechNova?",
-        "What wording should be used for each of the individual feature titles- for example- Smart Automation- Advanced Analytics- Enterprise Security?": [
-            "Smart Automation",
-            "Advanced Analytics",
-            "Enterprise Security",
-            "Seamless Integration"
-        ],
-        "What wording should be used for the 'Testimonials' section heading to convey customer satisfaction?": "What Our Clients Say",
-        "What is the desired wording for the call-to-action heading and supporting text in the email collection section?": {
-            "heading": "Stay Updated with Our Latest Innovations",
-            "text": "Subscribe to our newsletter for exclusive insights, updates, and special offers."
-        },
-        "What placeholder text should be used in the email input field of the email collection form?": "Abdelrahman.m2922@gmail.com",
-        "What wording should be used for the navigation links (e.g.- Features- Testimonials- Pricing- Contact)?": [
-            "Features",
-            "Testimonials",
-            "Pricing",
-            "Contact"
-        ]
-    }
-    
-    # Customize HTML with responses
-    json_parser = JsonParser(HtmlTemplate)
-    customization_builder = HtmlCustomizationTemplateBuilder(json_parser.get_format_instructions())
-    
-    customized_html = processor.customize_html(
-        customization_builder,
-        json_parser,
-        website_content
-    )
-    
-    print("\nCustomized HTML Template:")
-    print(customized_html['html_template'])
-    
-    new_html = html_processor.replace_html_body(customized_html['html_template'])
-    
-    html_processor.save_html('new_html.html', new_html)
+from src.llm_blocks.custmize_json_placeholder import CustomizeJsonPlaceholder
+from src.html_process_manager import HtmlProcessManager
+from src.utils.move_random_images import move_random_images
 
 if __name__ == "__main__":
-    main()
+    # Example usage
+    business_name = "Electro Pi"
+    business_description = "development of cutting-edge technology and AI solution and software."
+    
+    # Call the function with the example data
+    
+    # Create an instance of HtmlProcessManager
+    html_manager = HtmlProcessManager()
+    json_placeholder = html_manager.get_json_placeholder(r'Placeholder_template\software_placeholders\placeholder.json')
+    html_placeholder = html_manager.get_html_placeholder(r'Placeholder_template\software_placeholders\placeholder.html')
+    # print(json_placeholder)
+    # print(html_placeholder)
+    customize_json_placeholder_llm =  CustomizeJsonPlaceholder()
+    updated_json = customize_json_placeholder_llm.run(business_name, business_description, json_placeholder)
+    new_html = html_manager.geneate_new_html(updated_json, html_placeholder)
+    print('this is json from model  ' , updated_json)
+    # Example usage
+    src_root_folder = r"Placeholder_template\software_images"
+    dest_folder = r"technology-software_template\assets\img"
+    move_random_images(src_root_folder, dest_folder)
+    
+    
+    # Generate new HTML using the updated JSON object
+    html_manager.save_new_html(new_html , r'technology-software_template\new_html.html')
+
+    # Print the updated JSON object
+    
+
+
+
