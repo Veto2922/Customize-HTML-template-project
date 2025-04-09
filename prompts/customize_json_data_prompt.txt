@@ -9,6 +9,8 @@
             1. A **business title** (e.g., "GreenLeaf Marketing")
             2. A **short business description** (e.g., "A digital marketing agency specializing in eco-friendly brands")
             3. A **JSON object** containing placeholder keys meant for HTML content replacement.
+            4. The placeholder Start by **C** for text and Start by **I** for iamges
+            
 
             Your goal is to:
 
@@ -26,7 +28,8 @@
             4. If certain keys are ambiguous or not clearly tied to the input, infer appropriate values based on standard website practices (e.g., for `"hero_text"`, write an engaging H1 that combines branding and mission).
             5. Enrich the JSON by **adding new key-value pairs**, only if they align with enhancing a business website's structure or messaging.
             6. Ensure the JSON remains well-formatted, syntactically valid, and contextually coherent.
-            7. Return the updated JSON object only. No additional commentary or explanations.
+            7. Ensure all iamges placeholder was replaced with the appropriate image path in context
+            8. Return the updated JSON object only. No additional commentary or explanations.
 
             ---
 
@@ -38,20 +41,47 @@
             - **Business Description**:  
             `{business_description}`
 
-- **Initial JSON Template**:  
-    ```json
-    {{
-    {json_placeholder}
-    }}
-    ```
+            - **iamges path and description **: 
+                {{
+                    "assets/img/100x100/1.png": "A person wearing glasses and a black t-shirt. They have a friendly expression and are smiling. The background is plain white."  ,
+                    "assets/img/100x100/2.png": "A person wearing a dark-colored shirt with a mandarin collar. The background is plain and light-colored, emphasizing the subject's face and attire.",
+                    "assets/img/100x100/3.png": "A person wearing glasses and a gray t-shirt. The background appears to be an outdoor scene with mountains or hills in the distance." ,
+                    "assets/img/100x100/4.png": "A person with neatly styled hair and a serious expression. They are wearing a dark-colored shirt with a mandarin collar. The background is plain and neutral, emphasizing the subject's face.",
+                    "assets/img/100x100/5.png": "A person wearing a light gray t-shirt with colorful confetti scattered around them. The background is plain white, creating a cheerful and festive atmosphere.",
+                    "assets/img/100x100/6.png": "A person wearing a black jacket and a gray scarf, holding a thermos. The background shows an outdoor setting with trees and a blurred landscape." ,
+                    "assets/img/100x100/7.png": "A person with a serious expression, wearing a blue t-shirt and a denim jacket. The background is plain and light-colored, focusing on the subject's face and attire.", 
+                    "assets/img/100x100/8.png": "A black-and-white portrait of a person with short hair and a small heart tattoo on their cheek. They are wearing a denim jacket over a collared shirt.",
 
----
+                    "assets/img/800x600/1.png": "A close-up of a laptop screen displaying lines of colorful code. A blurred hand is visible on the left, partially typing on the keyboard. The screen is dark with bright syntax highlighting. A second monitor with more code is visible in the blurry background.",
+                    "assets/img/800x600/2.png":  "A person's hands are shown typing on a silver laptop keyboard. A smartphone is connected to the laptop via a cable and rests on the table. A white to-go coffee cup and a pair of glasses are also on the light wooden table. The background shows a bright, blurred window.",
+                    "assets/img/800x600/3.png":  "A very close-up shot of a computer screen displaying lines of code with bright syntax highlighting against a dark background. The focus is sharp on the code, with some subtle reflections visible on the screen.",
+                    "assets/img/800x600/4.png":  "A wide shot of a collaborative workspace. Two people are sitting at a long wooden desk, each working on laptops. One person is in focus in the foreground, typing on a laptop, while the other person is blurred in the background. There are multiple laptops, monitors, and work materials on the desk. Natural light is coming from a large window.",
+                    "assets/img/800x600/5.png":"A close-up of a person's hands typing on a silver laptop keyboard. The focus is on the hands and the keyboard. The person is wearing a watch with a dark strap. The laptop screen displays lines of code with syntax highlighting. The background is a blurred wooden surface.",
+                    "assets/img/800x600/6.png":  "A very close-up, slightly blurry shot of a computer screen displaying lines of code with vibrant syntax highlighting against a dark background. The code appears complex and detailed.",
+                    "assets/img/800x600/7.png":  "A close-up shot of a silver laptop with a screen displaying colorful code. The laptop is open, and the keyboard is visible. The background is dark, drawing attention to the illuminated screen.",
+                    "assets/img/800x600/8.png":  "A close-up of a computer screen displaying lines of code with colorful syntax highlighting. The code is well-lit and in focus. The surrounding environment is dark, emphasizing the screen.",
+                    "assets/img/800x600/9.png":  "A man with a long white beard and glasses, wearing a gray suit jacket, is standing and looking at a robotic arm positioned over a chessboard. The man has his hand to his mouth in a thoughtful pose. The background is a plain black.",
+                    "assets/img/800x600/10.png":  "A macro shot of a computer screen displaying the word 'Security' in a bright blue font. A pixelated cursor arrow is pointing towards the word. The background is a dark gray or black.",
+                    "assets/img/800x600/11.png":  "A close-up shot of a MacBook Pro screen displaying lines of code with syntax highlighting. The macOS dock with various application icons is visible at the bottom. The keyboard is partially visible in the foreground.",
+                    "assets/img/800x600/12.png":  "A close-up of a computer monitor displaying a complex, futuristic graphical user interface with various circular elements, lines, and text in shades of blue and green. It appears to be a technical or diagnostic display.",
+                    "assets/img/800x600/13.png":  "A dimly lit room with a circular table at the center. Four individuals wearing dark hoodies and stylized masks (resembling Guy Fawkes masks) are sitting around the table, each in front of multiple computer monitors displaying lines of code and other digital information. The room has a dark and somewhat clandestine atmosphere, with red neon lighting accents and an American flag hanging on the wall."   
+                    }}
 
-Take a deep breath and approach this task step by step.  
+            - **Initial JSON Template**:  
+                ```json
+                {{
+                {json_placeholder}
+                }}
+                ```
 
-Follow the instructions below carefully:  
-{format_instructions}
+            ---
 
----
+            Take a deep breath and approach this task step by step.  
 
-**IMPORTANT:** Your final output **must** follow the structure of the initial JSON placeholder, with each key updated appropriately.
+            Follow the instructions below carefully:  
+            {format_instructions}
+
+            ---
+
+            **IMPORTANT:** Your final output **must** follow the structure of the initial JSON placeholder, with each key updated appropriately.
+            **IMPORTANT: ** If the C and I placeholders share the same code (e.g., C016 and I016), it means they are related tags or belong to the same section. In this case, please select the image based on the C description you generated to ensure the chosen image path is appropriate and contextually accurate.

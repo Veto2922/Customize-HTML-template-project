@@ -18,6 +18,11 @@
   "C015": "Banner CTA button text",
   "C016": "Banner subheading (e.g. 100M+ users)",
 
+  "I016_01": "Rating provider logo or icon 1 (100x100)",
+  "I016_02": "Rating provider logo or icon 2 (100x100)",
+  "I016_03": "Rating provider logo or icon 3  (100x100)",
+  "I016_04": "Rating provider logo or icon 4 (100x100)",
+
   "C017": "Work Process sub-heading",
   "C018": "Work Process heading",
   "C019": "Process box 1 title",
@@ -125,18 +130,22 @@
   "C110": "Blog post #1 author",
   "C111": "Blog post #1 date",
   "C112": "Blog post #1 title",
+  "I112": "Featured image for the first blog post (800x600)",
   "C113": "Blog post #1 'Read more' link text",
 
   "C114": "Blog post #2 author",
   "C115": "Blog post #2 date",
   "C116": "Blog post #2 title",
+  "I116": "Featured image for the second blog post (800x600)",
+  
   "C117": "Blog post #2 'Read more' link text",
 
   "C118": "Blog post #3 author",
   "C119": "Blog post #3 date",
   "C120": "Blog post #3 title",
+  "I120": "Featured image for the third blog post (800x600)",
   "C121": "Blog post #3 'Read more' link text",
-
+  
   "C122": "Footer newsletter text",
   "C123": "Footer newsletter button text",
   "C124": "Footer copyright text",
