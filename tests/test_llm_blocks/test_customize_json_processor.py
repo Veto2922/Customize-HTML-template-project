@@ -1,7 +1,10 @@
 import pytest
 from unittest.mock import patch, mock_open, MagicMock
 from src.llm_blocks.custmize_json_placeholder import CustomizeJsonPlaceholder
-
+from src.llm_blocks_helper.api_key_loader import APIKeyLoader
+from src.llm_blocks_helper.model_loader import ModelLoader
+from src.llm_blocks_helper.prompt_loader import PromptLoader
+from src.llm_blocks_helper.chain_builder import ChainBuilder
 
 
 @pytest.fixture
@@ -23,10 +26,20 @@ def sample_input():
             "C010": "Footer text"  }
     }
 
+api_key_loader = APIKeyLoader()
+model_loader = ModelLoader()
+prompt_loader = PromptLoader()
+chain_builder = ChainBuilder()
 
 def test_customize_json_data_returns_expected_dict(sample_input):
+    processor = CustomizeJsonPlaceholder(
+                            api_key_loader=api_key_loader,
+                            model_loader=model_loader,
+                            prompt_loader=prompt_loader,
+                            chain_builder=chain_builder
+                                )
     
-    result = CustomizeJsonPlaceholder().run(
+    result = processor.run(
         sample_input["business_name"],
         sample_input["business_description"],
         sample_input["json_placeholder"]

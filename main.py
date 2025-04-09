@@ -1,19 +1,32 @@
 from src.llm_blocks.custmize_json_placeholder import CustomizeJsonPlaceholder
 from src.utils.html_process_manager import HtmlProcessManager
 from src.utils.select_random_image_and_move_it_to_Html_src import select_random_image_and_move_it_to_Html_src
+from src.llm_blocks_helper.api_key_loader import APIKeyLoader
+from src.llm_blocks_helper.model_loader import ModelLoader
+from src.llm_blocks_helper.prompt_loader import PromptLoader
+from src.llm_blocks_helper.chain_builder import ChainBuilder
 
 if __name__ == "__main__":
     # Example usage
     business_name = "Electro Pi"
     business_description = "development of cutting-edge technology and AI solution and software."
     
-   
+    api_key_loader = APIKeyLoader()
+    model_loader = ModelLoader()
+    prompt_loader = PromptLoader()
+    chain_builder = ChainBuilder()
+    
     # Create an instance of HtmlProcessManager
     html_manager = HtmlProcessManager()
     json_placeholder = html_manager.get_json_placeholder(r'Placeholder_template\software_placeholders\placeholder.json')
     html_placeholder = html_manager.get_html_placeholder(r'Placeholder_template\software_placeholders\placeholder.html')
     
-    customize_json_placeholder_llm =  CustomizeJsonPlaceholder()
+    customize_json_placeholder_llm =  CustomizeJsonPlaceholder(
+                            api_key_loader=api_key_loader,
+                            model_loader=model_loader,
+                            prompt_loader=prompt_loader,
+                            chain_builder=chain_builder
+                        )
     updated_json = customize_json_placeholder_llm.run(business_name, business_description, json_placeholder)
     new_html = html_manager.generate_new_html(updated_json, html_placeholder)
     print('this is json from model  ' , updated_json)
