@@ -47,7 +47,11 @@ def html_test_file(temp_dir):
 def json_test_file(temp_dir):
     """Create a test JSON file"""
     json_path = os.path.join(temp_dir, "test.json")
-    json_data = {"key": "value", "nested": {"key": "value"}}
+    json_data = {
+                "{{TITLE}}": "Test Title",
+                "{{HEADER}}": "Test Header",
+                "{{CONTENT}}": "Test Content"
+            }
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(json_data, f)
     return json_path, json_data
@@ -96,19 +100,11 @@ class TestHtmlProcessor:
         
         # Get test paths
         html_path, _ = html_test_file
-        json_path, _ = json_test_file
+        _, json_data = json_test_file
         output_path = os.path.join(temp_dir, "output.html")
         
-        # Override JSON data with template-specific data
-        with open(json_path, 'w', encoding='utf-8') as f:
-            json.dump({
-                "{{TITLE}}": "Test Title",
-                "{{HEADER}}": "Test Header",
-                "{{CONTENT}}": "Test Content"
-            }, f)
-        
         # Process the HTML
-        result = processor.process(json_path, html_path, output_path)
+        result = processor.process(json_data, html_path, output_path)
         
         # Check that output file exists
         assert os.path.exists(output_path)
