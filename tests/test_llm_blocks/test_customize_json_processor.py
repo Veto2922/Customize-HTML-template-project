@@ -23,7 +23,13 @@ def sample_input():
             "C007": "Main menu link 5 (Pricing)",
             "C008": "Main menu link 6 (Blog)",
             "C009": "Nav button text (e.g. Start Writing)",
-            "C010": "Footer text"  }
+            "C010": "Footer text"  },
+        
+        "images_description": 
+            {
+            "assets/img/100x100/1.png": "A person wearing glasses and a black t-shirt. They have a friendly expression and are smiling. The background is plain white."  ,
+            "assets/img/100x100/2.png": "A person wearing a dark-colored shirt with a mandarin collar. The background is plain and light-colored, emphasizing the subject's face."  
+                }
     }
 
 api_key_loader = APIKeyLoader()
@@ -42,6 +48,7 @@ def test_customize_json_data_returns_expected_dict(sample_input):
     result = processor.run(
         sample_input["business_name"],
         sample_input["business_description"],
+        sample_input["images_description"],
         sample_input["json_placeholder"]
     )
     
