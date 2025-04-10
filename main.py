@@ -11,6 +11,7 @@ from src.files_manager.helper.file_writers import TextFileWriter
 from src.files_manager.helper.html_template import HtmlTemplate
 
 from traceback import format_exc
+import os
 
 
 class App:
@@ -79,11 +80,11 @@ if __name__ == "__main__":
         "If you put any person images please put persons wearing glasses only."
     )
 
-    json_placeholder_path = r'Placeholder_template\software_placeholders\placeholder.json'
-    html_placeholder_path = r'Placeholder_template\software_placeholders\placeholder.html'
-    josn_image_description_path = r'Placeholder_template\software_placeholders\images_description.json'
+    json_placeholder_path = os.path.join( "Placeholder_template" ,"software_placeholders" , "placeholder.json" )
+    html_placeholder_path = os.path.join('Placeholder_template' , 'software_placeholders' , 'placeholder.html')
+    josn_image_description_path = os.path.join('Placeholder_template' , 'software_placeholders' , 'images_description.json')
+    output_path = os.path.join('technology-software_template' , 'new_html.html')
 
-    output_path = r'technology-software_template\new_html.html'
 
     # Create an instance of the App class and run it
     app = App(business_name, business_description, json_placeholder_path,josn_image_description_path ,html_placeholder_path, output_path)

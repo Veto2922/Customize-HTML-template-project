@@ -5,6 +5,7 @@ from src.llm_blocks_helper.chain_builder import ChainBuilder
 from src.Log_Manager.log_manager import get_logger
 from src.schemas.custom_json_output_format import custom_json_output_parser
 
+import os
 from .base import LLMProcessor
 from src.llm_blocks_helper.base import BaseLLMComponent
 
@@ -22,9 +23,10 @@ class CustomizeJsonPlaceholder(LLMProcessor):
 
     def run(self, business_name: str, business_description: str, images_description : dict ,json_placeholder: dict) -> dict:
         try:
+            prompt_path  = os.path.join("prompts" , "customize_json_data_prompt.txt")
             api_key = self.api_key_loader.execute()
             llm = self.model_loader.execute(api_key)
-            prompt_template = self.prompt_loader.execute()
+            prompt_template = self.prompt_loader.execute(prompt_path)
             chain = self.chain_builder.execute(prompt_template, llm, custom_json_output_parser)
 
             response = chain.invoke({

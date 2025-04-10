@@ -1,5 +1,5 @@
 import streamlit as st
-
+import os
 from src.files_manager.folder_archiver import ZipFolderArchiver
 
 from main import App
@@ -19,10 +19,10 @@ if st.button("🚀 Generate HTML"):
     else:
         with st.spinner("Generating content with AI..."):
             
-            json_placeholder_path = r'Placeholder_template\software_placeholders\placeholder.json'
-            html_placeholder_path = r'Placeholder_template\software_placeholders\placeholder.html'
-            josn_image_description_path = r'Placeholder_template\software_placeholders\images_description.json'
-            output_path = r'technology-software_template\new_html.html'
+            json_placeholder_path = os.path.join( "Placeholder_template" ,"software_placeholders" , "placeholder.json" )
+            html_placeholder_path = os.path.join('Placeholder_template' , 'software_placeholders' , 'placeholder.html')
+            josn_image_description_path = os.path.join('Placeholder_template' , 'software_placeholders' , 'images_description.json')
+            output_path = os.path.join('technology-software_template' , 'new_html.html')
             
             # Create an instance of the App class and run it
             app = App(business_name, business_description, json_placeholder_path,josn_image_description_path ,html_placeholder_path, output_path)
