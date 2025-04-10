@@ -1,4 +1,3 @@
-import os
 import json
 from src.Log_Manager.log_manager import get_logger
 
