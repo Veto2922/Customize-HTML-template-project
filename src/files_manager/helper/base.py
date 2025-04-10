@@ -27,3 +27,11 @@ class DirectoryManager(ABC):
     @abstractmethod
     def list_files_with_extensions(self, directory_path, extensions):
         pass
+
+# Define an abstract interface for zipping operations
+class FolderArchiver(ABC):
+    """Abstract interface for folder archiving operations"""
+    @abstractmethod
+    def archive(self, folder_path):
+        """Archive a folder and return the archive data"""
+        pass

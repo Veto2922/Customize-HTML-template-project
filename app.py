@@ -1,20 +1,11 @@
 import streamlit as st
 
-from src.llm_blocks.custmize_json_placeholder import CustomizeJsonPlaceholder
-from src.llm_blocks_helper.api_key_loader import APIKeyLoader
-from src.llm_blocks_helper.model_loader import ModelLoader
-from src.llm_blocks_helper.prompt_loader import PromptLoader
-from src.llm_blocks_helper.chain_builder import ChainBuilder
+from src.files_manager.folder_archiver import ZipFolderArchiver
 
-from src.files_manager.html_processor import HtmlProcessor
-from src.files_manager.helper import image_processor
-from src.files_manager.helper.file_readers import JsonFileReader, TextFileReader
-from src.files_manager.helper.file_writers import TextFileWriter
-from src.files_manager.helper.html_template import HtmlTemplate
 from main import App
 
 # Streamlit app
-st.set_page_config(page_title="Dynamic HTML Generator", layout="wide")
+st.set_page_config(page_title="Dynamic HTML Generator", layout="centered")
 
 st.title("🧠 AI-Powered Business HTML Generator")
 
@@ -28,16 +19,13 @@ if st.button("🚀 Generate HTML"):
     else:
         with st.spinner("Generating content with AI..."):
             
-            
             json_placeholder_path = r'Placeholder_template\software_placeholders\placeholder.json'
             html_placeholder_path = r'Placeholder_template\software_placeholders\placeholder.html'
-            # Save to specific path
+            josn_image_description_path = r'Placeholder_template\software_placeholders\images_description.json'
             output_path = r'technology-software_template\new_html.html'
             
-            
-            
             # Create an instance of the App class and run it
-            app = App(business_name, business_description, json_placeholder_path, html_placeholder_path, output_path)
+            app = App(business_name, business_description, json_placeholder_path,josn_image_description_path ,html_placeholder_path, output_path)
             app.run()
 
         st.success("✅ HTML generated successfully!")
@@ -45,13 +33,34 @@ if st.button("🚀 Generate HTML"):
         with open(output_path, 'r', encoding='utf-8') as file:
             new_html = file.read()
         
-        preview_url = f"http://localhost:5500/{output_path}"
-            
+        
         # Provide a link to open in a new tab
-        st.markdown(f"### Preview Your Generated HTML")
-        st.markdown(f'<a href="{preview_url}" target="_blank">Click here to open your HTML in a new tab</a>', unsafe_allow_html=True)
-
-        # Display the HTML in an iframe
-        st.markdown("### 🔍 Live Preview")
-        print(new_html)
-        st.components.v1.html(new_html, height=800, scrolling=True)
+        st.markdown(f"### Download Your Generated HTML")
+        
+        download_col1, download_col2 = st.columns(2)
+        with download_col1:
+            st.download_button(label="Download Only HTML",
+                            data=new_html,
+                            on_click='ignore',
+                            file_name='index.html',
+                            key="download-html",
+                            use_container_width=True)
+        
+        with download_col2:
+            # Create an archiver
+            archiver = ZipFolderArchiver()
+            
+            # Archive the folder
+            zip_data = archiver.archive('technology-software_template')
+            
+            # Provide a download button for the zip file
+            zip_name = f'{business_name} Landing Page.zip'
+            st.download_button(
+                        label="Download All The Project",
+                        data=zip_data,
+                        file_name=zip_name,
+                        mime="application/zip",
+                        key="download-zip",
+                        on_click="ignore",
+                        use_container_width=True
+                    )
