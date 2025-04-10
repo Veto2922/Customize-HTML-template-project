@@ -11,7 +11,7 @@ from src.files_manager.helper import image_processor
 from src.files_manager.helper.file_readers import JsonFileReader, TextFileReader
 from src.files_manager.helper.file_writers import TextFileWriter
 from src.files_manager.helper.html_template import HtmlTemplate
-
+from main import App
 
 # Streamlit app
 st.set_page_config(page_title="Dynamic HTML Generator", layout="wide")
@@ -27,37 +27,18 @@ if st.button("🚀 Generate HTML"):
         st.warning("Please fill in both fields before proceeding.")
     else:
         with st.spinner("Generating content with AI..."):
-            api_key_loader = APIKeyLoader()
-            model_loader = ModelLoader()
-            prompt_loader = PromptLoader()
-            chain_builder = ChainBuilder()
+            
             
             json_placeholder_path = r'Placeholder_template\software_placeholders\placeholder.json'
             html_placeholder_path = r'Placeholder_template\software_placeholders\placeholder.html'
             # Save to specific path
             output_path = r'technology-software_template\new_html.html'
             
-            json_placeholder = JsonFileReader().read(json_placeholder_path)
             
-            customize_json_placeholder_llm =  CustomizeJsonPlaceholder(
-                                    api_key_loader=api_key_loader,
-                                    model_loader=model_loader,
-                                    prompt_loader=prompt_loader,
-                                    chain_builder=chain_builder
-                                )
             
-            updated_json = customize_json_placeholder_llm.run(business_name, business_description, json_placeholder)
-            
-            # Create an instance of HtmlProcessManager
-            processor = HtmlProcessor(
-                JsonFileReader(),
-                TextFileReader(),
-                TextFileWriter(),
-                HtmlTemplate(),
-                image_processor
-            )
-            
-            new_html = processor.process(updated_json, html_placeholder_path, output_path)
+            # Create an instance of the App class and run it
+            app = App(business_name, business_description, json_placeholder_path, html_placeholder_path, output_path)
+            app.run()
 
         st.success("✅ HTML generated successfully!")
         
