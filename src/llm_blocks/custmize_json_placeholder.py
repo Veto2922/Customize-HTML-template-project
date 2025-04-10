@@ -20,7 +20,7 @@ class CustomizeJsonPlaceholder(LLMProcessor):
         self.prompt_loader = prompt_loader
         self.chain_builder = chain_builder
 
-    def run(self, business_name: str, business_description: str, json_placeholder: dict) -> dict:
+    def run(self, business_name: str, business_description: str, images_description : dict ,json_placeholder: dict) -> dict:
         try:
             api_key = self.api_key_loader.execute()
             llm = self.model_loader.execute(api_key)
@@ -28,6 +28,7 @@ class CustomizeJsonPlaceholder(LLMProcessor):
             chain = self.chain_builder.execute(prompt_template, llm, custom_json_output_parser)
 
             response = chain.invoke({
+                "images_description" : images_description, 
                 'json_placeholder': json_placeholder,
                 'business_name': business_name,
                 'business_description': business_description

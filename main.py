@@ -10,15 +10,18 @@ from src.files_manager.helper.file_readers import JsonFileReader, TextFileReader
 from src.files_manager.helper.file_writers import TextFileWriter
 from src.files_manager.helper.html_template import HtmlTemplate
 
+from traceback import format_exc
+
 
 class App:
-    def __init__(self, business_name, business_description, json_placeholder_path, html_placeholder_path, output_path):
+    def __init__(self, business_name, business_description, json_placeholder_path, josn_image_description_path ,html_placeholder_path, output_path):
         """
         Initialize the App with necessary parameters.
         """
         self.business_name = business_name
         self.business_description = business_description
         self.json_placeholder_path = json_placeholder_path
+        self.josn_image_description_path = josn_image_description_path
         self.html_placeholder_path = html_placeholder_path
         self.output_path = output_path
 
@@ -35,16 +38,19 @@ class App:
         try:
             # Step 1: Read the JSON placeholder file
             json_placeholder = JsonFileReader().read(self.json_placeholder_path)
+            json_image_description = JsonFileReader().read(self.josn_image_description_path)
+            
 
             # Step 2: Customize the JSON placeholder using LLM
             customize_json_placeholder_llm = CustomizeJsonPlaceholder(
-                api_key_loader=self.api_key_loader,
-                model_loader=self.model_loader,
-                prompt_loader=self.prompt_loader,
-                chain_builder=self.chain_builder
-            )
+                                    api_key_loader=self.api_key_loader,
+                                    model_loader=self.model_loader,
+                                    prompt_loader=self.prompt_loader,
+                                    chain_builder=self.chain_builder
+                                )
+            
             updated_json = customize_json_placeholder_llm.run(
-                self.business_name, self.business_description, json_placeholder
+                self.business_name, self.business_description, json_image_description  ,json_placeholder
             )
 
             # Step 3: Process HTML template with updated JSON data
@@ -62,7 +68,7 @@ class App:
             print(f"HTML file successfully generated at: {self.output_path}")
 
         except Exception as e:
-            print(f"An error occurred: {e}")
+            print(f"An error occurred: " , format_exc)
 
 
 if __name__ == "__main__":
@@ -75,8 +81,10 @@ if __name__ == "__main__":
 
     json_placeholder_path = r'Placeholder_template\software_placeholders\placeholder.json'
     html_placeholder_path = r'Placeholder_template\software_placeholders\placeholder.html'
+    josn_image_description_path = r'Placeholder_template\software_placeholders\images_description.json'
+
     output_path = r'technology-software_template\new_html.html'
 
     # Create an instance of the App class and run it
-    app = App(business_name, business_description, json_placeholder_path, html_placeholder_path, output_path)
+    app = App(business_name, business_description, json_placeholder_path,josn_image_description_path ,html_placeholder_path, output_path)
     app.run()
