@@ -1,13 +1,17 @@
 import streamlit as st
+
 from src.llm_blocks.custmize_json_placeholder import CustomizeJsonPlaceholder
-from src.utils.html_process_manager import HtmlProcessManager
-from src.utils.select_random_image_and_move_it_to_Html_src import select_random_image_and_move_it_to_Html_src
 from src.llm_blocks_helper.api_key_loader import APIKeyLoader
 from src.llm_blocks_helper.model_loader import ModelLoader
 from src.llm_blocks_helper.prompt_loader import PromptLoader
 from src.llm_blocks_helper.chain_builder import ChainBuilder
-# # Save to specific path
-save_path = r'technology-software_template\new_html.html'
+
+from src.files_manager.html_processor import HtmlProcessor
+from src.files_manager.helper import image_processor
+from src.files_manager.helper.file_readers import JsonFileReader, TextFileReader
+from src.files_manager.helper.file_writers import TextFileWriter
+from src.files_manager.helper.html_template import HtmlTemplate
+
 
 # Streamlit app
 st.set_page_config(page_title="Dynamic HTML Generator", layout="wide")
@@ -28,10 +32,12 @@ if st.button("🚀 Generate HTML"):
             prompt_loader = PromptLoader()
             chain_builder = ChainBuilder()
             
-            # Create an instance of HtmlProcessManager
-            html_manager = HtmlProcessManager()
-            json_placeholder = html_manager.get_json_placeholder(r'Placeholder_template\software_placeholders\placeholder.json')
-            html_placeholder = html_manager.get_html_placeholder(r'Placeholder_template\software_placeholders\placeholder.html')
+            json_placeholder_path = r'Placeholder_template\software_placeholders\placeholder.json'
+            html_placeholder_path = r'Placeholder_template\software_placeholders\placeholder.html'
+            # Save to specific path
+            output_path = r'technology-software_template\new_html.html'
+            
+            json_placeholder = JsonFileReader().read(json_placeholder_path)
             
             customize_json_placeholder_llm =  CustomizeJsonPlaceholder(
                                     api_key_loader=api_key_loader,
@@ -39,25 +45,26 @@ if st.button("🚀 Generate HTML"):
                                     prompt_loader=prompt_loader,
                                     chain_builder=chain_builder
                                 )
+            
             updated_json = customize_json_placeholder_llm.run(business_name, business_description, json_placeholder)
-            new_html = html_manager.generate_new_html(updated_json, html_placeholder)
-            print('this is json from model  ' , updated_json)
             
-            # Example usage
-            src_root_folder = r"Placeholder_template\software_images"
-            dest_folder = r"technology-software_template\assets\img"
-            select_random_image_and_move_it_to_Html_src(src_root_folder, dest_folder)
+            # Create an instance of HtmlProcessManager
+            processor = HtmlProcessor(
+                JsonFileReader(),
+                TextFileReader(),
+                TextFileWriter(),
+                HtmlTemplate(),
+                image_processor
+            )
             
-            # Generate new HTML using the updated JSON object
-            html_manager.save_new_html(new_html , r'technology-software_template\new_html.html')
-
+            new_html = processor.process(updated_json, html_placeholder_path, output_path)
 
         st.success("✅ HTML generated successfully!")
         
-        with open(save_path, 'r', encoding='utf-8') as file:
+        with open(output_path, 'r', encoding='utf-8') as file:
             new_html = file.read()
         
-        preview_url = f"http://localhost:5500/{save_path}"
+        preview_url = f"http://localhost:5500/{output_path}"
             
         # Provide a link to open in a new tab
         st.markdown(f"### Preview Your Generated HTML")
