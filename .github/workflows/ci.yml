@@ -1,38 +1,38 @@
-name : CI
+name: CI
 
-on :
+on:
   push:
-    branches: 
+    branches:
+      - main  # Specify the branch to trigger on push
   pull_request:
-    branches: 
-
+    branches:
+      - main  # Specify the branch to trigger on pull requests
 
 jobs:
   run-tests:
     strategy:
       fail-fast: false
       matrix:
-        os : [ubuntu-latest, windows-latest, macos-latest]
-        # Define the Python versions to test against
-        python-version: 
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version:
           - "3.8"
           - "3.9"
           - "3.10"
           - "3.11"
           - "3.12"
-          - "pypy-3.7"
-          - "pypy-3.8"
-          - "pypy-3.9"
+          # Comment out PyPy versions if not needed
+          # - "pypy-3.7"
+          # - "pypy-3.8"
+          # - "pypy-3.9"
 
-
-    name: Test 
+    name: Run Tests on ${{ matrix.os }} with Python ${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Python 
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
@@ -42,7 +42,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Run linting checks
+        run: |
+          pip install flake8
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
       - name: Run tests
         run: |
-          pytest --tb=short --disable-warnings -q --maxfail=1 --cov=.
-    
+          pip install pytest pytest-cov
+          pytest --tb=short --disable-warnings -q --maxfail=1 --cov=. --cov-report=xml --cov-report=term-missing
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}  # Optional: Add Codecov token if using Codecov
+          files: ./coverage.xml
