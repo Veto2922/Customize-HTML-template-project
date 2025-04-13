@@ -40,8 +40,9 @@ jobs:
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       
-      - name: Export GEMINI_API_KEY
-        run: echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> $GITHUB_ENV
+      - name: Create .env file
+        run: |
+          echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env
 
       - name: Run tests
         run: |
